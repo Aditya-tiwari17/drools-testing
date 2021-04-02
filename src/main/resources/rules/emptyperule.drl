@@ -1,0 +1,50 @@
+package plausibcheck.emptyperule
+
+import de.jonashackt.springdrools.internalmodel.EmploymentDetail;
+import de.jonashackt.springdrools.internalmodel.ApplicationRuleResult;
+
+
+//from row number: 1
+//ROW1
+rule "Row 1 emptyperule"
+	salience 100
+	dialect "mvel"
+	when
+		empDetail : EmploymentDetail( this != null , employementType != null , employementType in ( "SALARIED" ) )
+		appRuleResult : ApplicationRuleResult( this != null , empTypeEnabledDecision == null )
+	then
+	    System.out.println("Row 1 emptyperule fired")
+		modify( appRuleResult ) {
+				setEmpTypeEnabledDecision( true )
+		}
+end
+
+//from row number: 2
+//ROW2
+rule "Row 2 emptyperule"
+	salience 100
+	dialect "mvel"
+	when
+		empDetail : EmploymentDetail( this != null , employementType != null , employementType in ( "SELF_EMP" ) )
+		appRuleResult : ApplicationRuleResult( this != null , empTypeEnabledDecision == null )
+	then
+	    System.out.println("Row 2 emptyperule fired")
+		modify( appRuleResult ) {
+				setEmpTypeEnabledDecision( true )
+		}
+end
+
+//from row number: 3
+//ROW3
+rule "Row 3 emptyperule"
+	salience 99
+	dialect "mvel"
+	when
+		empDetail : EmploymentDetail( this != null , employementType != null )
+		appRuleResult : ApplicationRuleResult( this != null , empTypeEnabledDecision == null )
+	then
+	    System.out.println("Row 3 emptyperule fired")
+		modify( appRuleResult ) {
+				setEmpTypeEnabledDecision( false )
+		}
+end

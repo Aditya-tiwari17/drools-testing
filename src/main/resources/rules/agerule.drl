@@ -1,0 +1,106 @@
+//created on: 28.05.2015
+package plausibcheck.agerule
+
+import de.jonashackt.springdrools.internalmodel.EmploymentDetail;
+import de.jonashackt.springdrools.internalmodel.BirthDetail;
+import de.jonashackt.springdrools.internalmodel.ApplicationRuleResult;
+
+//ApplicationRuleResult appRuleResult = new ApplicationRuleResult();
+
+//from row number: 1
+//ROW1
+rule "Row 1 agerule"
+	salience 100
+	dialect "mvel"
+	when
+		empDetail : EmploymentDetail( this != null , employementType != null , employementType in ( "SALARIED" ) )
+		birthDetail : BirthDetail( this != null , age != null , age >= 21.0 , age <= 58.0 )
+		appRuleResult : ApplicationRuleResult( this != null , ageRuleDecision == null )
+	then
+	    System.out.println("Rule 1 fired");
+		modify( appRuleResult ) {
+				setAgeRuleDecision( true )
+		}
+end
+
+//from row number: 2
+//ROW2
+rule "Row 2 agerule"
+	salience 100
+	dialect "mvel"
+	when
+		empDetail : EmploymentDetail( this != null , employementType != null , employementType in ( "SALARIED" ) )
+		birthDetail : BirthDetail( this != null , age != null , age > 58.0 )
+		appRuleResult : ApplicationRuleResult( this != null , ageRuleDecision == null )
+	then
+	    System.out.println("Rule 2 fired");
+		modify( appRuleResult ) {
+				setAgeRuleDecision( false )
+		}
+end
+
+//from row number: 3
+//ROW3
+rule "Row 3 agerule"
+	salience 100
+	dialect "mvel"
+	when
+		empDetail : EmploymentDetail( this != null , employementType != null , employementType in ( "SALARIED" ) )
+		birthDetail : BirthDetail( this != null , age != null , age < 21.0 )
+		appRuleResult : ApplicationRuleResult( this != null , ageRuleDecision == null )
+	then
+	    System.out.println("Rule 3 fired");
+		modify( appRuleResult ) {
+				setAgeRuleDecision( false )
+		}
+end
+
+//from row number: 4
+//ROW4
+rule "Row 4 agerule"
+	salience 100
+	dialect "mvel"
+	when
+		empDetail : EmploymentDetail( this != null , employementType != null , employementType in ( "SELF_EMP" ) )
+		birthDetail : BirthDetail( this != null , age != null , age >= 25.0 , age <= 60.0 )
+		appRuleResult : ApplicationRuleResult( this != null , ageRuleDecision == null )
+	then
+	    System.out.println("Rule 4 fired");
+		modify( appRuleResult ) {
+				setAgeRuleDecision( true )
+		}
+end
+
+//from row number: 5
+//ROW5
+rule "Row 5 agerule"
+	salience 100
+	dialect "mvel"
+	when
+		empDetail : EmploymentDetail( this != null , employementType != null , employementType in ( "SELF_EMP" ) )
+		birthDetail : BirthDetail( this != null , age != null , age > 60.0 )
+		appRuleResult : ApplicationRuleResult( this != null , ageRuleDecision == null )
+	then
+	    System.out.println("Rule 5 fired");
+		modify( appRuleResult ) {
+				setAgeRuleDecision( false )
+		}
+end
+
+//from row number: 6
+//ROW6
+rule "Row 6 agerule"
+	salience 100
+	dialect "mvel"
+	when
+		empDetail : EmploymentDetail( this != null , employementType != null , employementType in ( "SELF_EMP" ) )
+		birthDetail : BirthDetail( this != null , age != null , age < 25.0 )
+		appRuleResult : ApplicationRuleResult( this != null , ageRuleDecision == null )
+	then
+	    System.out.println("Rule 6 fired");
+		modify( appRuleResult ) {
+				setAgeRuleDecision( false )
+		}
+end
+
+
