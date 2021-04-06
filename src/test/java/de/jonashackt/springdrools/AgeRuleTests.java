@@ -1,6 +1,11 @@
 package de.jonashackt.springdrools;
 
 import static org.junit.Assert.*;
+
+import com.github.jeichler.junit.drools.DroolsJUnitRunner;
+import com.github.jeichler.junit.drools.annotation.DroolsFiles;
+import com.github.jeichler.junit.drools.annotation.StatefulDroolsSession;
+import com.github.jeichler.junit.drools.session.DroolsSession;
 import de.jonashackt.springdrools.internalmodel.ApplicationRuleResult;
 import de.jonashackt.springdrools.internalmodel.BirthDetail;
 import de.jonashackt.springdrools.internalmodel.EmploymentDetail;
@@ -13,8 +18,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-//@DroolsFiles(value = "agerule.drl", location = "/rules/")
-@RunWith(SpringJUnit4ClassRunner.class)
+@DroolsFiles(ruleFiles = {"rules/agerule.drl"})
+@RunWith(DroolsJUnitRunner.class)
 @SpringApplicationConfiguration(classes = SpringdroolsApplication.class)
 public class AgeRuleTests {
 
@@ -22,30 +27,25 @@ public class AgeRuleTests {
 	BirthDetail birthDetail = new BirthDetail();
 	ApplicationRuleResult applicationRuleResult = new ApplicationRuleResult();
 
-	@Autowired
-	KieSession kieSession;
+	@StatefulDroolsSession
+	private DroolsSession<?> kieSession;
+
+	private void insertObjects(EmploymentDetail employmentDetail,
+							   BirthDetail birthDetail,
+							   ApplicationRuleResult applicationRuleResult) {
+		kieSession.insert(employmentDetail);
+		kieSession.insert(birthDetail);
+		kieSession.insert(applicationRuleResult);
+	}
 
 	@Test
 	public void ageRuleTest1() {
-//		EmploymentDetail employmentDetail = new EmploymentDetail();
-//		BirthDetail birthDetail = new BirthDetail();
-//		ApplicationRuleResult applicationRuleResult = new ApplicationRuleResult();
 		employmentDetail.setEmployementType("SALARIED");
 		birthDetail.setAge(25f);
 
-		FactHandle e = kieSession.insert(employmentDetail);
-		FactHandle b = kieSession.insert(birthDetail);
-		FactHandle a = kieSession.insert(applicationRuleResult);
-
-		System.out.println("Before "+applicationRuleResult.getAgeRuleDecision());
+		insertObjects(employmentDetail,birthDetail,applicationRuleResult);
 
 		kieSession.fireAllRules();
-
-		kieSession.delete(e);
-		kieSession.delete(b);
-		kieSession.delete(a);
-
-		System.out.println("After "+applicationRuleResult.getAgeRuleDecision());
 
 		assertEquals(true,applicationRuleResult.getAgeRuleDecision());
 	}
@@ -55,15 +55,9 @@ public class AgeRuleTests {
 		employmentDetail.setEmployementType("SALARIED");
 		birthDetail.setAge(21f);
 
-		FactHandle e = kieSession.insert(employmentDetail);
-		FactHandle b = kieSession.insert(birthDetail);
-		FactHandle a = kieSession.insert(applicationRuleResult);
+		insertObjects(employmentDetail,birthDetail,applicationRuleResult);
 
 		kieSession.fireAllRules();
-
-		kieSession.delete(e);
-		kieSession.delete(b);
-		kieSession.delete(a);
 
 		assertEquals(true,applicationRuleResult.getAgeRuleDecision());
 	}
@@ -73,15 +67,9 @@ public class AgeRuleTests {
 		employmentDetail.setEmployementType("SALARIED");
 		birthDetail.setAge(58f);
 
-		FactHandle e = kieSession.insert(employmentDetail);
-		FactHandle b = kieSession.insert(birthDetail);
-		FactHandle a = kieSession.insert(applicationRuleResult);
+		insertObjects(employmentDetail,birthDetail,applicationRuleResult);
 
 		kieSession.fireAllRules();
-
-		kieSession.delete(e);
-		kieSession.delete(b);
-		kieSession.delete(a);
 
 		assertEquals(true,applicationRuleResult.getAgeRuleDecision());
 	}
@@ -91,15 +79,9 @@ public class AgeRuleTests {
 		employmentDetail.setEmployementType("SALARIED");
 		birthDetail.setAge(59f);
 
-		FactHandle e = kieSession.insert(employmentDetail);
-		FactHandle b = kieSession.insert(birthDetail);
-		FactHandle a = kieSession.insert(applicationRuleResult);
+		insertObjects(employmentDetail,birthDetail,applicationRuleResult);
 
 		kieSession.fireAllRules();
-
-		kieSession.delete(e);
-		kieSession.delete(b);
-		kieSession.delete(a);
 
 		assertEquals(false,applicationRuleResult.getAgeRuleDecision());
 	}
@@ -109,15 +91,9 @@ public class AgeRuleTests {
 		employmentDetail.setEmployementType("SALARIED");
 		birthDetail.setAge(20f);
 
-		FactHandle e = kieSession.insert(employmentDetail);
-		FactHandle b = kieSession.insert(birthDetail);
-		FactHandle a = kieSession.insert(applicationRuleResult);
+		insertObjects(employmentDetail,birthDetail,applicationRuleResult);
 
 		kieSession.fireAllRules();
-
-		kieSession.delete(e);
-		kieSession.delete(b);
-		kieSession.delete(a);
 
 		assertEquals(false,applicationRuleResult.getAgeRuleDecision());
 	}
@@ -127,15 +103,9 @@ public class AgeRuleTests {
 		employmentDetail.setEmployementType("SELF_EMP");
 		birthDetail.setAge(25f);
 
-		FactHandle e = kieSession.insert(employmentDetail);
-		FactHandle b = kieSession.insert(birthDetail);
-		FactHandle a = kieSession.insert(applicationRuleResult);
+		insertObjects(employmentDetail,birthDetail,applicationRuleResult);
 
 		kieSession.fireAllRules();
-
-		kieSession.delete(e);
-		kieSession.delete(b);
-		kieSession.delete(a);
 
 		assertEquals(true,applicationRuleResult.getAgeRuleDecision());
 	}
@@ -145,15 +115,9 @@ public class AgeRuleTests {
 		employmentDetail.setEmployementType("SELF_EMP");
 		birthDetail.setAge(35f);
 
-		FactHandle e = kieSession.insert(employmentDetail);
-		FactHandle b = kieSession.insert(birthDetail);
-		FactHandle a = kieSession.insert(applicationRuleResult);
+		insertObjects(employmentDetail,birthDetail,applicationRuleResult);
 
 		kieSession.fireAllRules();
-
-		kieSession.delete(e);
-		kieSession.delete(b);
-		kieSession.delete(a);
 
 		assertEquals(true,applicationRuleResult.getAgeRuleDecision());
 	}
@@ -163,15 +127,9 @@ public class AgeRuleTests {
 		employmentDetail.setEmployementType("SELF_EMP");
 		birthDetail.setAge(60f);
 
-		FactHandle e = kieSession.insert(employmentDetail);
-		FactHandle b = kieSession.insert(birthDetail);
-		FactHandle a = kieSession.insert(applicationRuleResult);
+		insertObjects(employmentDetail,birthDetail,applicationRuleResult);
 
 		kieSession.fireAllRules();
-
-		kieSession.delete(e);
-		kieSession.delete(b);
-		kieSession.delete(a);
 
 		assertEquals(true,applicationRuleResult.getAgeRuleDecision());
 	}
@@ -181,15 +139,9 @@ public class AgeRuleTests {
 		employmentDetail.setEmployementType("SELF_EMP");
 		birthDetail.setAge(61f);
 
-		FactHandle e = kieSession.insert(employmentDetail);
-		FactHandle b = kieSession.insert(birthDetail);
-		FactHandle a = kieSession.insert(applicationRuleResult);
+		insertObjects(employmentDetail,birthDetail,applicationRuleResult);
 
 		kieSession.fireAllRules();
-
-		kieSession.delete(e);
-		kieSession.delete(b);
-		kieSession.delete(a);
 
 		assertEquals(false,applicationRuleResult.getAgeRuleDecision());
 	}
@@ -199,37 +151,10 @@ public class AgeRuleTests {
 		employmentDetail.setEmployementType("SELF_EMP");
 		birthDetail.setAge(24f);
 
-		FactHandle e = kieSession.insert(employmentDetail);
-		FactHandle b = kieSession.insert(birthDetail);
-		FactHandle a = kieSession.insert(applicationRuleResult);
+		insertObjects(employmentDetail,birthDetail,applicationRuleResult);
 
 		kieSession.fireAllRules();
 
-		kieSession.delete(e);
-		kieSession.delete(b);
-		kieSession.delete(a);
-
 		assertEquals(false,applicationRuleResult.getAgeRuleDecision());
 	}
-
-//	@Test
-//	public void contextLoads() {
-//		// Given
-//	    Address address = new Address();
-//	    address.setPostcode("99425");
-//	    address.setStreet("Haalstreet");
-//	    address.setState("ALBANIA");
-//
-//	    // When
-//	    // Let´s give the Drools Knowledge-Base an Object, we can then apply rules on
-//	    kieSession.insert(address);
-//		int ruleFiredCount = kieSession.fireAllRules();
-//
-//
-//
-//		// Then
-//		assertEquals("there´s 1 rule, so there should be 1 fired", 1, ruleFiredCount);
-//		LOG.debug("Rules checked: {}" + ruleFiredCount);
-//	}
-
 }

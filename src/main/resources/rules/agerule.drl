@@ -1,5 +1,5 @@
 //created on: 28.05.2015
-package plausibcheck.agerule
+package rules;
 
 import de.jonashackt.springdrools.internalmodel.EmploymentDetail;
 import de.jonashackt.springdrools.internalmodel.BirthDetail;
@@ -17,7 +17,7 @@ rule "Row 1 agerule"
 		birthDetail : BirthDetail( this != null , age != null , age >= 21.0 , age <= 58.0 )
 		appRuleResult : ApplicationRuleResult( this != null , ageRuleDecision == null )
 	then
-	    System.out.println("Rule 1 fired");
+	    System.out.println("Row 1 agerule fired");
 		modify( appRuleResult ) {
 				setAgeRuleDecision( true )
 		}
@@ -33,7 +33,7 @@ rule "Row 2 agerule"
 		birthDetail : BirthDetail( this != null , age != null , age > 58.0 )
 		appRuleResult : ApplicationRuleResult( this != null , ageRuleDecision == null )
 	then
-	    System.out.println("Rule 2 fired");
+	    System.out.println("Row 2 agerule fired");
 		modify( appRuleResult ) {
 				setAgeRuleDecision( false )
 		}
@@ -49,7 +49,7 @@ rule "Row 3 agerule"
 		birthDetail : BirthDetail( this != null , age != null , age < 21.0 )
 		appRuleResult : ApplicationRuleResult( this != null , ageRuleDecision == null )
 	then
-	    System.out.println("Rule 3 fired");
+	    System.out.println("Row 3 agerule fired");
 		modify( appRuleResult ) {
 				setAgeRuleDecision( false )
 		}
@@ -65,7 +65,7 @@ rule "Row 4 agerule"
 		birthDetail : BirthDetail( this != null , age != null , age >= 25.0 , age <= 60.0 )
 		appRuleResult : ApplicationRuleResult( this != null , ageRuleDecision == null )
 	then
-	    System.out.println("Rule 4 fired");
+	    System.out.println("Row 4 agerule fired");
 		modify( appRuleResult ) {
 				setAgeRuleDecision( true )
 		}
@@ -81,7 +81,7 @@ rule "Row 5 agerule"
 		birthDetail : BirthDetail( this != null , age != null , age > 60.0 )
 		appRuleResult : ApplicationRuleResult( this != null , ageRuleDecision == null )
 	then
-	    System.out.println("Rule 5 fired");
+	    System.out.println("Row 5 agerule fired");
 		modify( appRuleResult ) {
 				setAgeRuleDecision( false )
 		}
@@ -97,7 +97,7 @@ rule "Row 6 agerule"
 		birthDetail : BirthDetail( this != null , age != null , age < 25.0 )
 		appRuleResult : ApplicationRuleResult( this != null , ageRuleDecision == null )
 	then
-	    System.out.println("Rule 6 fired");
+	    System.out.println("Row 6 agerule fired");
 		modify( appRuleResult ) {
 				setAgeRuleDecision( false )
 		}

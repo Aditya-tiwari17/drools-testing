@@ -1,5 +1,9 @@
 package de.jonashackt.springdrools;
 
+import com.github.jeichler.junit.drools.DroolsJUnitRunner;
+import com.github.jeichler.junit.drools.annotation.DroolsFiles;
+import com.github.jeichler.junit.drools.annotation.StatefulDroolsSession;
+import com.github.jeichler.junit.drools.session.DroolsSession;
 import de.jonashackt.springdrools.internalmodel.ApplicationRuleResult;
 import de.jonashackt.springdrools.internalmodel.EmploymentDetail;
 import org.junit.Test;
@@ -12,25 +16,29 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import static org.junit.Assert.assertEquals;
 
-@RunWith(SpringJUnit4ClassRunner.class)
+@DroolsFiles(ruleFiles = {"rules/emptyperule.drl"})
+@RunWith(DroolsJUnitRunner.class)
 @SpringApplicationConfiguration(classes = SpringdroolsApplication.class)
 public class EmptyPeRuleTests {
     EmploymentDetail employmentDetail = new EmploymentDetail();
     ApplicationRuleResult applicationRuleResult = new ApplicationRuleResult();
 
-    @Autowired
-    KieSession kieSession;
+    @StatefulDroolsSession
+    private DroolsSession<?> kieSession;
+
+    private void insertObjects(EmploymentDetail employmentDetail,
+                               ApplicationRuleResult applicationRuleResult) {
+        kieSession.insert(employmentDetail);
+        kieSession.insert(applicationRuleResult);
+    }
 
     @Test
     public void emptyPeRuleTest1() {
         employmentDetail.setEmployementType("SALARIED");
-        FactHandle e = kieSession.insert(employmentDetail);
-        FactHandle a = kieSession.insert(applicationRuleResult);
+
+        insertObjects(employmentDetail,applicationRuleResult);
 
         kieSession.fireAllRules();
-
-        kieSession.delete(e);
-        kieSession.delete(a);
 
         assertEquals(true,applicationRuleResult.getEmpTypeEnabledDecision());
     }
@@ -38,13 +46,10 @@ public class EmptyPeRuleTests {
     @Test
     public void emptyPeRuleTest2() {
         employmentDetail.setEmployementType("SELF_EMP");
-        FactHandle e = kieSession.insert(employmentDetail);
-        FactHandle a = kieSession.insert(applicationRuleResult);
+
+        insertObjects(employmentDetail,applicationRuleResult);
 
         kieSession.fireAllRules();
-
-        kieSession.delete(e);
-        kieSession.delete(a);
 
         assertEquals(true,applicationRuleResult.getEmpTypeEnabledDecision());
     }
@@ -52,13 +57,10 @@ public class EmptyPeRuleTests {
     @Test
     public void emptyPeRuleTest3() {
         employmentDetail.setEmployementType("UNEMPLOYED");
-        FactHandle e = kieSession.insert(employmentDetail);
-        FactHandle a = kieSession.insert(applicationRuleResult);
+
+        insertObjects(employmentDetail,applicationRuleResult);
 
         kieSession.fireAllRules();
-
-        kieSession.delete(e);
-        kieSession.delete(a);
 
         assertEquals(false,applicationRuleResult.getEmpTypeEnabledDecision());
     }

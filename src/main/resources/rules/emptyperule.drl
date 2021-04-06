@@ -1,4 +1,4 @@
-package plausibcheck.emptyperule
+package rules;
 
 import de.jonashackt.springdrools.internalmodel.EmploymentDetail;
 import de.jonashackt.springdrools.internalmodel.ApplicationRuleResult;
