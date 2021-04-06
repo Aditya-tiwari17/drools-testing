@@ -1,0 +1,225 @@
+package rules;
+
+import de.jonashackt.springdrools.internalmodel.LenderGenericRuleResult;
+import de.jonashackt.springdrools.internalmodel.ApplicationRuleResult;
+import de.jonashackt.springdrools.internalmodel.ApplicationFeatures;
+
+//from row number: 1
+//ROW1
+rule "Row 1 givenlenderminstatedincome"
+	salience 99
+	dialect "mvel"
+	when
+		exists (appFeature : ApplicationFeatures( this != null ) and appFeature1 : ApplicationFeatures( lender != null , lender == "FULLERTON" )) 
+		lgr : LenderGenericRuleResult( this != null , ficclMetroRuleDefinition != null , ficclMetroRuleDefinition == "METRO" )
+		appFeature2 : ApplicationFeatures( this != null , statedIncome != null , statedIncome <= 20000 )
+		applicationRuleResult : ApplicationRuleResult( this != null , givenLenderMinStatedIncomeRuleDecision == null )
+	then
+	    System.out.println("Row 1 givenlenderminstatedincome fired");
+		modify( applicationRuleResult ) {
+				setGivenLenderMinStatedIncomeRuleDecision( false )
+		}
+end
+
+//from row number: 2
+//ROW2
+rule "Row 2 givenlenderminstatedincome"
+	salience 99
+	dialect "mvel"
+	when
+		exists (appFeature : ApplicationFeatures( this != null ) and appFeature1 : ApplicationFeatures( lender != null , lender == "FULLERTON" )) 
+		lgr : LenderGenericRuleResult( this != null , ficclMetroRuleDefinition != null , ficclMetroRuleDefinition == "NON_METRO" )
+		appFeature2 : ApplicationFeatures( this != null , statedIncome != null , statedIncome <= 18000 )
+		applicationRuleResult : ApplicationRuleResult( this != null , givenLenderMinStatedIncomeRuleDecision == null )
+	then
+	    System.out.println("Row 2 givenlenderminstatedincome fired");
+		modify( applicationRuleResult ) {
+				setGivenLenderMinStatedIncomeRuleDecision( false )
+		}
+end
+
+//from row number: 3
+//ROW3
+rule "Row 3 givenlenderminstatedincome"
+	salience 99
+	dialect "mvel"
+	when
+		exists (appFeature : ApplicationFeatures( this != null ) and appFeature1 : ApplicationFeatures( lender != null , lender == "IIFL" )) 
+		lgr2 : LenderGenericRuleResult( this != null , ifflMetroRuleDefinition != null , ifflMetroRuleDefinition == "METRO" )
+		appFeature2 : ApplicationFeatures( this != null , statedIncome != null , statedIncome <= 20000 )
+		applicationRuleResult : ApplicationRuleResult( this != null , givenLenderMinStatedIncomeRuleDecision == null )
+	then
+	    System.out.println("Row 3 givenlenderminstatedincome fired");
+		modify( applicationRuleResult ) {
+				setGivenLenderMinStatedIncomeRuleDecision( false )
+		}
+end
+
+//from row number: 4
+//ROW4
+rule "Row 4 givenlenderminstatedincome"
+	salience 99
+	dialect "mvel"
+	when
+		exists (appFeature : ApplicationFeatures( this != null ) and appFeature1 : ApplicationFeatures( lender != null , lender == "IIFL" )) 
+		lgr2 : LenderGenericRuleResult( this != null , ifflMetroRuleDefinition != null , ifflMetroRuleDefinition == "NON_METRO" )
+		appFeature2 : ApplicationFeatures( this != null , statedIncome != null , statedIncome <= 18000 )
+		applicationRuleResult : ApplicationRuleResult( this != null , givenLenderMinStatedIncomeRuleDecision == null )
+	then
+	    System.out.println("Row 4 givenlenderminstatedincome fired");
+		modify( applicationRuleResult ) {
+				setGivenLenderMinStatedIncomeRuleDecision( false )
+		}
+end
+
+//from row number: 5
+//ROW5
+rule "Row 5 givenlenderminstatedincome"
+	salience 99
+	dialect "mvel"
+	when
+		exists (appFeature : ApplicationFeatures( this != null ) and appFeature1 : ApplicationFeatures( lender != null , lender == "KSF" )) 
+		lgr3 : LenderGenericRuleResult( this != null , ksfMetroRuleDefinition != null , ksfMetroRuleDefinition == "METRO" )
+		appFeature2 : ApplicationFeatures( this != null , statedIncome != null , statedIncome <= 20000 )
+		applicationRuleResult : ApplicationRuleResult( this != null , givenLenderMinStatedIncomeRuleDecision == null )
+	then
+	    System.out.println("Row 5 givenlenderminstatedincome fired");
+		modify( applicationRuleResult ) {
+				setGivenLenderMinStatedIncomeRuleDecision( false )
+		}
+end
+
+//from row number: 6
+//ROW6
+rule "Row 6 givenlenderminstatedincome"
+	salience 99
+	dialect "mvel"
+	when
+		exists (appFeature : ApplicationFeatures( this != null ) and appFeature1 : ApplicationFeatures( lender != null , lender == "KSF" )) 
+		lgr3 : LenderGenericRuleResult( this != null , ksfMetroRuleDefinition != null , ksfMetroRuleDefinition == "NON_METRO" )
+		appFeature2 : ApplicationFeatures( this != null , statedIncome != null , statedIncome <= 18000 )
+		applicationRuleResult : ApplicationRuleResult( this != null , givenLenderMinStatedIncomeRuleDecision == null )
+	then
+	    System.out.println("Row 6 givenlenderminstatedincome fired");
+		modify( applicationRuleResult ) {
+				setGivenLenderMinStatedIncomeRuleDecision( false )
+		}
+end
+
+//from row number: 7
+//ROW7
+rule "Row 7 givenlenderminstatedincome"
+	salience 99
+	dialect "mvel"
+	when
+		exists (appFeature : ApplicationFeatures( this != null ) and appFeature1 : ApplicationFeatures( lender != null , lender == "NORTHERN_ARC" )) 
+		lgr4 : LenderGenericRuleResult( this != null , narcMetroRuleDefinition != null , narcMetroRuleDefinition == "METRO" )
+		appFeature2 : ApplicationFeatures( this != null , statedIncome != null , statedIncome <= 20000 )
+		applicationRuleResult : ApplicationRuleResult( this != null , givenLenderMinStatedIncomeRuleDecision == null )
+	then
+	    System.out.println("Row 7 givenlenderminstatedincome fired");
+		modify( applicationRuleResult ) {
+				setGivenLenderMinStatedIncomeRuleDecision( false )
+		}
+end
+
+//from row number: 8
+//ROW8
+rule "Row 8 givenlenderminstatedincome"
+	salience 99
+	dialect "mvel"
+	when
+		exists (appFeature : ApplicationFeatures( this != null ) and appFeature1 : ApplicationFeatures( lender != null , lender == "NORTHERN_ARC" )) 
+		lgr4 : LenderGenericRuleResult( this != null , narcMetroRuleDefinition != null , narcMetroRuleDefinition == "NON_METRO" )
+		appFeature2 : ApplicationFeatures( this != null , statedIncome != null , statedIncome <= 18000 )
+		applicationRuleResult : ApplicationRuleResult( this != null , givenLenderMinStatedIncomeRuleDecision == null )
+	then
+	    System.out.println("Row 8 givenlenderminstatedincome fired");
+		modify( applicationRuleResult ) {
+				setGivenLenderMinStatedIncomeRuleDecision( false )
+		}
+end
+
+//from row number: 9
+//ROW9
+rule "Row 9 givenlenderminstatedincome"
+	salience 99
+	dialect "mvel"
+	when
+		exists (appFeature : ApplicationFeatures( this != null ) and appFeature1 : ApplicationFeatures( lender != null , lender == "PAYUFIN" )) 
+		lgr5 : LenderGenericRuleResult( this != null , payuFinMetroRuleDefinition != null , payuFinMetroRuleDefinition == "METRO" )
+		appFeature2 : ApplicationFeatures( this != null , statedIncome != null , statedIncome <= 20000 )
+		applicationRuleResult : ApplicationRuleResult( this != null , givenLenderMinStatedIncomeRuleDecision == null )
+	then
+	    System.out.println("Row 9 givenlenderminstatedincome fired");
+		modify( applicationRuleResult ) {
+				setGivenLenderMinStatedIncomeRuleDecision( false )
+		}
+end
+
+//from row number: 10
+//ROW10
+rule "Row 10 givenlenderminstatedincome"
+	salience 99
+	dialect "mvel"
+	when
+		exists (appFeature : ApplicationFeatures( this != null ) and appFeature1 : ApplicationFeatures( lender != null , lender == "PAYUFIN" )) 
+		lgr5 : LenderGenericRuleResult( this != null , payuFinMetroRuleDefinition != null , payuFinMetroRuleDefinition == "NON_METRO" )
+		appFeature2 : ApplicationFeatures( this != null , statedIncome != null , statedIncome <= 18000 )
+		applicationRuleResult : ApplicationRuleResult( this != null , givenLenderMinStatedIncomeRuleDecision == null )
+	then
+	    System.out.println("Row 10 givenlenderminstatedincome fired");
+		modify( applicationRuleResult ) {
+				setGivenLenderMinStatedIncomeRuleDecision( false )
+		}
+end
+
+//from row number: 11
+//ROW11
+rule "Row 11 givenlenderminstatedincome"
+	salience 98
+	dialect "mvel"
+	when
+		appFeature2 : ApplicationFeatures( this != null , statedIncome != null )
+		applicationRuleResult : ApplicationRuleResult( this != null , givenLenderMinStatedIncomeRuleDecision == null )
+	then
+	    System.out.println("Row 11 givenlenderminstatedincome fired");
+		modify( applicationRuleResult ) {
+				setGivenLenderMinStatedIncomeRuleDecision( true )
+		}
+end
+
+//from row number: 12
+//ROW12
+rule "Row 12 givenlenderminstatedincome"
+	salience 99
+	dialect "mvel"
+	when
+		exists (appFeature : ApplicationFeatures( this != null ) and appFeature1 : ApplicationFeatures( lender != null , lender == "IDFC" )) 
+		LenderGenericRuleResult( this != null , idfcMetroRuleDefinition != null , idfcMetroRuleDefinition == "METRO" )
+		appFeature2 : ApplicationFeatures( this != null , statedIncome != null , statedIncome <= 18000 )
+		applicationRuleResult : ApplicationRuleResult( this != null , givenLenderMinStatedIncomeRuleDecision == null )
+	then
+	    System.out.println("Row 12 givenlenderminstatedincome fired");
+		modify( applicationRuleResult ) {
+				setGivenLenderMinStatedIncomeRuleDecision( false )
+		}
+end
+
+//from row number: 13
+//ROW13
+rule "Row 13 givenlenderminstatedincome"
+	salience 99
+	dialect "mvel"
+	when
+		exists (appFeature : ApplicationFeatures( this != null ) and appFeature1 : ApplicationFeatures( lender != null , lender == "IDFC" )) 
+		LenderGenericRuleResult( this != null , idfcMetroRuleDefinition != null , idfcMetroRuleDefinition == "NON_METRO" )
+		appFeature2 : ApplicationFeatures( this != null , statedIncome != null , statedIncome <= 12000 )
+		applicationRuleResult : ApplicationRuleResult( this != null , givenLenderMinStatedIncomeRuleDecision == null )
+	then
+	    System.out.println("Row 13 givenlenderminstatedincome fired");
+		modify( applicationRuleResult ) {
+				setGivenLenderMinStatedIncomeRuleDecision( false )
+		}
+end
+

@@ -1,22 +1,14 @@
 package de.jonashackt.springdrools;
 
 import static org.junit.Assert.*;
-
 import com.github.jeichler.junit.drools.DroolsJUnitRunner;
 import com.github.jeichler.junit.drools.annotation.DroolsFiles;
 import com.github.jeichler.junit.drools.annotation.StatefulDroolsSession;
 import com.github.jeichler.junit.drools.session.DroolsSession;
-import de.jonashackt.springdrools.internalmodel.ApplicationRuleResult;
-import de.jonashackt.springdrools.internalmodel.BirthDetail;
-import de.jonashackt.springdrools.internalmodel.EmploymentDetail;
-import org.junit.Before;
+import de.jonashackt.springdrools.internalmodel.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.kie.api.runtime.KieSession;
-import org.kie.api.runtime.rule.FactHandle;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @DroolsFiles(ruleFiles = {"rules/agerule.drl"})
 @RunWith(DroolsJUnitRunner.class)

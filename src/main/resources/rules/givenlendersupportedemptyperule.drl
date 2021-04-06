@@ -1,0 +1,116 @@
+package rules;
+
+import de.jonashackt.springdrools.internalmodel.EmploymentDetail;
+import de.jonashackt.springdrools.internalmodel.ApplicationRuleResult;
+import de.jonashackt.springdrools.internalmodel.ApplicationFeatures;
+
+//from row number: 1
+//ROW1
+rule "Row 1 givenlendersupportedemptyperule"
+	salience 100
+	dialect "mvel"
+	when
+		exists (appFeature3 : ApplicationFeatures( this != null , lender != null , lender == "FULLERTON" )) 
+		exists (empDetail : EmploymentDetail( this != null , employementType != null , employementType == "SALARIED" )) 
+		appRuleResult : ApplicationRuleResult( this != null , givenLenderSupportedEmpTypeDecision == null )
+	then
+	    System.out.println("Row 1 givenlendersupportedemptyperule fired");
+		modify( appRuleResult ) {
+				setGivenLenderSupportedEmpTypeDecision( true )
+		}
+end
+
+//from row number: 2
+//ROW3
+rule "Row 2 givenlendersupportedemptyperule"
+	salience 100
+	dialect "mvel"
+	when
+		exists (appFeature3 : ApplicationFeatures( this != null , lender != null , lender == "IIFL" )) 
+		exists (empDetail : EmploymentDetail( this != null , employementType != null , employementType == "SALARIED" )) 
+		appRuleResult : ApplicationRuleResult( this != null , givenLenderSupportedEmpTypeDecision == null )
+	then
+	    System.out.println("Row 2 givenlendersupportedemptyperule fired");
+		modify( appRuleResult ) {
+				setGivenLenderSupportedEmpTypeDecision( true )
+		}
+end
+
+//from row number: 3
+//ROW4
+rule "Row 3 givenlendersupportedemptyperule"
+	salience 100
+	dialect "mvel"
+	when
+		exists (appFeature3 : ApplicationFeatures( this != null , lender != null , lender == "KSF" ))
+		exists (empDetail : EmploymentDetail( this != null , employementType != null , employementType == "SALARIED" )) 
+		appRuleResult : ApplicationRuleResult( this != null , givenLenderSupportedEmpTypeDecision == null )
+	then
+	    System.out.println("Row 3 givenlendersupportedemptyperule fired");
+		modify( appRuleResult ) {
+				setGivenLenderSupportedEmpTypeDecision( true )
+		}
+end
+
+//from row number: 4
+//ROW6
+rule "Row 4 givenlendersupportedemptyperule"
+	salience 100
+	dialect "mvel"
+	when
+		exists (appFeature3 : ApplicationFeatures( this != null , lender != null , lender == "NORTHERN_ARC" )) 
+		exists (empDetail : EmploymentDetail( this != null , employementType != null , employementType == "SALARIED" )) 
+		appRuleResult : ApplicationRuleResult( this != null , givenLenderSupportedEmpTypeDecision == null )
+	then
+	    System.out.println("Row 4 givenlendersupportedemptyperule fired");
+		modify( appRuleResult ) {
+				setGivenLenderSupportedEmpTypeDecision( true )
+		}
+end
+
+//from row number: 5
+//ROW7
+rule "Row 5 givenlendersupportedemptyperule"
+	salience 100
+	dialect "mvel"
+	when
+		exists (appFeature3 : ApplicationFeatures( this != null , lender != null , lender == "PAYUFIN" )) 
+		exists (empDetail : EmploymentDetail( this != null , employementType != null , employementType == "SALARIED" )) 
+		appRuleResult : ApplicationRuleResult( this != null , givenLenderSupportedEmpTypeDecision == null )
+	then
+	    System.out.println("Row 5 givenlendersupportedemptyperule fired");
+		modify( appRuleResult ) {
+				setGivenLenderSupportedEmpTypeDecision( true )
+		}
+end
+
+//from row number: 6
+//ROW9
+rule "Row 6 givenlendersupportedemptyperule"
+	salience 99
+	dialect "mvel"
+	when
+		appRuleResult : ApplicationRuleResult( this != null , givenLenderSupportedEmpTypeDecision == null )
+	then
+	    System.out.println("Row 6 givenlendersupportedemptyperule fired");
+		modify( appRuleResult ) {
+				setGivenLenderSupportedEmpTypeDecision( true )
+		}
+end
+
+//from row number: 7
+//ROW10
+rule "Row 7 givenlendersupportedemptyperule"
+	salience 100
+	dialect "mvel"
+	when
+		exists (appFeature3 : ApplicationFeatures( this != null , lender != null , lender == "IDFC" )) 
+		exists (empDetail : EmploymentDetail( this != null , employementType != null , employementType == "SALARIED" )) 
+		appRuleResult : ApplicationRuleResult( this != null , givenLenderSupportedEmpTypeDecision == null )
+	then
+	    System.out.println("Row 7 givenlendersupportedemptyperule fired");
+		modify( appRuleResult ) {
+				setGivenLenderSupportedEmpTypeDecision( true )
+		}
+end
+
