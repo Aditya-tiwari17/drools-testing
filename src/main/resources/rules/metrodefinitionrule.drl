@@ -1,0 +1,185 @@
+package rules;
+
+import de.jonashackt.springdrools.internalmodel.AddressDetail;
+import de.jonashackt.springdrools.internalmodel.LenderGenericRuleResult;
+
+//from row number: 1
+//ROW1
+rule "Row 1 metrodefinitionrule"
+	salience 100
+	dialect "mvel"
+	when
+		addressDetail : AddressDetail( this != null , city != null , city in ( "new delhi", "delhi", "gurgaon", "gurugram", "noida", "greater noida", "ghaziabad", "faridabad", "mumbai", "navi mumbai", "thane" ) )
+		lenderGenericRuleResult : LenderGenericRuleResult( this != null , payuFinMetroRuleDefinition == null )
+	then
+	    System.out.println("Row 1 metrodefinitionrule fired");
+		modify( lenderGenericRuleResult ) {
+				setPayuFinMetroRuleDefinition( "METRO" )
+		}
+end
+
+//from row number: 2
+//ROW2
+rule "Row 2 metrodefinitionrule"
+	salience 100
+	dialect "mvel"
+	when
+		addressDetail : AddressDetail( this != null , city != null , city not in ( "new delhi", "delhi", "gurgaon", "gurugram", "noida", "greater noida", "ghaziabad", "faridabad", "mumbai", "navi mumbai", "thane" ) )
+		lenderGenericRuleResult : LenderGenericRuleResult( this != null , payuFinMetroRuleDefinition == null )
+	then
+	    System.out.println("Row 2 metrodefinitionrule fired");
+		modify( lenderGenericRuleResult ) {
+				setPayuFinMetroRuleDefinition( "NON_METRO" )
+		}
+end
+
+//from row number: 3
+//ROW3
+rule "Row 3 metrodefinitionrule"
+	salience 100
+	dialect "mvel"
+	when
+		addressDetail : AddressDetail( this != null , city != null , city in ( "new delhi", "delhi", "gurgaon", "gurugram", "noida", "greater noida", "ghaziabad", "faridabad", "mumbai", "navi mumbai", "thane" ) )
+		lenderGenericRuleResult : LenderGenericRuleResult( ficclMetroRuleDefinition == null )
+	then
+	    System.out.println("Row 3 metrodefinitionrule fired");
+		modify( lenderGenericRuleResult ) {
+				setFicclMetroRuleDefinition( "METRO" )
+		}
+end
+
+//from row number: 4
+//ROW4
+rule "Row 4 metrodefinitionrule"
+	salience 100
+	dialect "mvel"
+	when
+		addressDetail : AddressDetail( this != null , city != null , city not in ( "new delhi", "delhi", "gurgaon", "gurugram", "noida", "greater noida", "ghaziabad", "faridabad", "mumbai", "navi mumbai", "thane" ) )
+		lenderGenericRuleResult : LenderGenericRuleResult( ficclMetroRuleDefinition == null )
+	then
+	    System.out.println("Row 4 metrodefinitionrule fired");
+		modify( lenderGenericRuleResult ) {
+				setFicclMetroRuleDefinition( "NON_METRO" )
+		}
+end
+
+//from row number: 5
+//ROW5
+rule "Row 5 metrodefinitionrule"
+	salience 100
+	dialect "mvel"
+	when
+		addressDetail : AddressDetail( this != null , city != null , city in ( "new delhi", "delhi", "gurgaon", "gurugram", "noida", "greater noida", "ghaziabad", "faridabad", "mumbai", "navi mumbai", "thane" ) )
+		lenderGenericRuleResult : LenderGenericRuleResult( ifflMetroRuleDefinition == null )
+	then
+	    System.out.println("Row 5 metrodefinitionrule fired");
+		modify( lenderGenericRuleResult ) {
+				setIfflMetroRuleDefinition( "METRO" )
+		}
+end
+
+//from row number: 6
+//ROW6
+rule "Row 6 metrodefinitionrule"
+	salience 100
+	dialect "mvel"
+	when
+		addressDetail : AddressDetail( this != null , city != null , city not in ( "new delhi", "delhi", "gurgaon", "gurugram", "noida", "greater noida", "ghaziabad", "faridabad", "mumbai", "navi mumbai", "thane" ) )
+		lenderGenericRuleResult : LenderGenericRuleResult( ifflMetroRuleDefinition == null )
+	then
+	    System.out.println("Row 6 metrodefinitionrule fired");
+		modify( lenderGenericRuleResult ) {
+				setIfflMetroRuleDefinition( "NON_METRO" )
+		}
+end
+
+//from row number: 7
+//ROW7
+rule "Row 7 metrodefinitionrule"
+	salience 100
+	dialect "mvel"
+	when
+		addressDetail : AddressDetail( this != null , city != null , city in ( "new delhi", "delhi", "gurgaon", "gurugram", "noida", "greater noida", "ghaziabad", "faridabad", "mumbai", "navi mumbai", "thane" ) )
+		lenderGenericRuleResult : LenderGenericRuleResult( ksfMetroRuleDefinition == null )
+	then
+	    System.out.println("Row 7 metrodefinitionrule fired");
+		modify( lenderGenericRuleResult ) {
+				setKsfMetroRuleDefinition( "METRO" )
+		}
+end
+
+//from row number: 8
+//ROW8
+rule "Row 8 metrodefinitionrule"
+	salience 100
+	dialect "mvel"
+	when
+		addressDetail : AddressDetail( this != null , city != null , city not in ( "new delhi", "delhi", "gurgaon", "gurugram", "noida", "greater noida", "ghaziabad", "faridabad", "mumbai", "navi mumbai", "thane" ) )
+		lenderGenericRuleResult : LenderGenericRuleResult( ksfMetroRuleDefinition == null )
+	then
+	    System.out.println("Row 8 metrodefinitionrule fired");
+		modify( lenderGenericRuleResult ) {
+				setKsfMetroRuleDefinition( "NON_METRO" )
+		}
+end
+
+//from row number: 9
+//ROW9
+rule "Row 9 metrodefinitionrule"
+	salience 100
+	dialect "mvel"
+	when
+		addressDetail : AddressDetail( this != null , city != null , city in ( "bengaluru", "bangalore", "new delhi", "delhi", "mumbai", "navi mumbai", "hyderabad", "secunderabad", "chennai", "kolkata", "thane", "gurgaon", "gurugram", "noida", "greater noida", "ghaziabad", "faridabad" ) )
+		lenderGenericRuleResult : LenderGenericRuleResult( narcMetroRuleDefinition == null )
+	then
+	    System.out.println("Row 9 metrodefinitionrule fired");
+		modify( lenderGenericRuleResult ) {
+				setNarcMetroRuleDefinition( "METRO" )
+		}
+end
+
+//from row number: 10
+//ROW10
+rule "Row 10 metrodefinitionrule"
+	salience 100
+	dialect "mvel"
+	when
+		addressDetail : AddressDetail( this != null , city != null , city not in ( "bengaluru", "bangalore", "new delhi", "delhi", "mumbai", "navi mumbai", "hyderabad", "secunderabad", "chennai", "kolkata", "thane", "gurgaon", "gurugram", "noida", "greater noida", "ghaziabad", "faridabad" ) )
+		lenderGenericRuleResult : LenderGenericRuleResult( narcMetroRuleDefinition == null )
+	then
+	    System.out.println("Row 10 metrodefinitionrule fired");
+		modify( lenderGenericRuleResult ) {
+				setNarcMetroRuleDefinition( "NON_METRO" )
+		}
+end
+
+//from row number: 11
+//ROW11
+rule "Row 11 metrodefinitionrule"
+	salience 100
+	dialect "mvel"
+	when
+		addressDetail : AddressDetail( this != null , city != null , city in ( "new delhi", "delhi", "gurgaon", "gurugram", "noida", "greater noida", "ghaziabad", "faridabad", "mumbai", "navi mumbai", "thane" ) )
+		lenderGenericRuleResult : LenderGenericRuleResult( idfcMetroRuleDefinition == null )
+	then
+	    System.out.println("Row 11 metrodefinitionrule fired");
+		modify( lenderGenericRuleResult ) {
+				setIdfcMetroRuleDefinition( "METRO" )
+		}
+end
+
+//from row number: 12
+//ROW12
+rule "Row 12 metrodefinitionrule"
+	salience 100
+	dialect "mvel"
+	when
+		addressDetail : AddressDetail( this != null , city != null , city not in ( "new delhi", "delhi", "gurgaon", "gurugram", "noida", "greater noida", "ghaziabad", "faridabad", "mumbai", "navi mumbai", "thane" ) )
+		lenderGenericRuleResult : LenderGenericRuleResult( idfcMetroRuleDefinition == null )
+	then
+	    System.out.println("Row 12 metrodefinitionrule fired");
+		modify( lenderGenericRuleResult ) {
+				setIdfcMetroRuleDefinition( "NON_METRO" )
+		}
+end
+
